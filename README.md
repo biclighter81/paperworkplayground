@@ -1,9 +1,12 @@
 # Release Commit Syntax
 `fix(pencil): stop graphite breaking when too much pressure applied` Fix Release
+
 `feat(pencil): add 'graphiteWidth' option` Feature Release
+
 `perf(pencil): remove graphiteWidth option` Performance Release
-```feature(SCOPE): MESSAGE
+
+`feature(SCOPE): MESSAGE
 
 BODYTEXT
 
-BREAKING CHANGE: WHATCHANGEDTEXT``` Major Release
+BREAKING CHANGE: WHATCHANGEDTEXT` Major Release
