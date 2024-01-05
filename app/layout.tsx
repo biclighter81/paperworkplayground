@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import getConfig from 'next/config';
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,9 +15,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const { publicRuntimeConfig } = getConfig();
+  const version = publicRuntimeConfig?.version
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>{version}{children}</body>
     </html>
   )
 }
