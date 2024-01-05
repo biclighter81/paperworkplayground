@@ -27,9 +27,17 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: npm clean-install
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCKER_REGISTRY_USER: ${{ github.actor }}
+          DOCKER_REGISTRY_PASSWORD: ${{ secrets.GHCR_TOKEN }}
         run: npx semantic-release
