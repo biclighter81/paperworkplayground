@@ -16,24 +16,30 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/npm",
-    [
-      "@codedependant/semantic-release-docker",
-      {
-        "dockerImage": "paperworkplayground",
-        "dockerRegistry": "ghcr.io",
-        "dockerProject": "biclighter81",
-        "dockerBuildFlags": {
-          "pull": null,
-          "target": "release"
-        },
-        "dockerArgs": {
-          "GITHUB_TOKEN": null
-        }
-      }
-    ]
+    "@semantic-release/npm"
   ],
   "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@codedependant/semantic-release-docker",
+        {
+          "dockerImage": "paperworkplayground",
+          "dockerRegistry": "ghcr.io",
+          "dockerProject": "biclighter81",
+          "dockerBuildFlags": {
+            "pull": null,
+            "target": "release"
+          },
+          "dockerArgs": {
+            "GITHUB_TOKEN": null
+          }
+        }
+      ]
+    ],
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
       "master",
