@@ -5,8 +5,9 @@
 
 `perf(pencil): remove graphiteWidth option` Performance Release
 
-`feature(SCOPE): MESSAGE
+Major Release
+```feature(SCOPE): MESSAGE
 
 BODYTEXT
 
-BREAKING CHANGE: WHATCHANGEDTEXT` Major Release
+BREAKING CHANGE: WHATCHANGEDTEXT```
