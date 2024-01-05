@@ -30,10 +30,6 @@
           "dockerImage": "paperworkplayground",
           "dockerRegistry": "ghcr.io",
           "dockerProject": "biclighter81",
-          "dockerBuildFlags": {
-            "pull": null,
-            "target": "release"
-          },
           "dockerArgs": {
             "GITHUB_TOKEN": null
           }
