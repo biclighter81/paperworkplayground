@@ -46,6 +46,10 @@ export default function StoryOverview({ storyData }: { storyData: { id: string, 
                 <IconPlus className="text-white h-4 w-4" />
             </div>
         </button>
+        <div className="flex flex-col">
+            <p className="uppercase text-sm font-bold mb-1">Suchen</p>
+            <input className="rounded-lg border border-[#FFDF35] px-4 py-1 text-sm outline-none mb-4" onChange={(e) => setStories([])}></input>
+        </div>
         <Modal isOpen={newModal} onRequestClose={() => setNewModal(false)} shouldCloseOnEsc style={{
             content: {
                 top: '50%',
