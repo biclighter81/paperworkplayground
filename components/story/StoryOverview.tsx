@@ -18,7 +18,7 @@ export default function StoryOverview({ storyData }: { storyData: { id: string, 
         file: undefined
     })
     const refetch = async () => {
-        const data = await (await fetch(`http://localhost:3000/api/story`)).json() as { id: string, name: string, description: string, file: string }[]
+        const data = await (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/story`)).json() as { id: string, name: string, description: string, file: string }[]
         setStories(data)
     }
     const saveStory = async () => {
@@ -28,7 +28,7 @@ export default function StoryOverview({ storyData }: { storyData: { id: string, 
         reader.onload = async (e) => {
             const data = e.target?.result as ArrayBuffer;
             const buff = Buffer.from(data)
-            const res = await fetch(`http://localhost:3000/api/story`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/story`, {
                 method: 'POST',
                 body: JSON.stringify({
                     name: story.name,
