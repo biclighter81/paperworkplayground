@@ -1,10 +1,10 @@
 "use client"
 
-import { IconArrowRight, IconDeviceFloppy, IconPlus } from "@tabler/icons-react"
+import { IconArrowRight, IconDeviceFloppy, IconPlus, IconStar, IconStarFilled } from "@tabler/icons-react"
 import Modal from 'react-modal';
 import { useState } from "react"
 
-export default function StoryOverview({ storyData }: { storyData: { id: string, name: string, description: string, file: string }[] }) {
+export default function StoryOverview({ storyData }: { storyData: { id: string, name: string, description: string, file: string, favorite: boolean }[] }) {
     const [stories, setStories] = useState<typeof storyData>(storyData)
     const [newModal, setNewModal] = useState(false)
     const [previewModal, setPreviewModal] = useState<undefined | string>()
@@ -15,10 +15,10 @@ export default function StoryOverview({ storyData }: { storyData: { id: string, 
     }>({
         name: '',
         description: '',
-        file: undefined
+        file: undefined,
     })
     const refetch = async () => {
-        const data = await (await fetch(`/api/story`)).json() as { id: string, name: string, description: string, file: string }[]
+        const data = await (await fetch(`/api/story`)).json() as { id: string, name: string, description: string, file: string, favorite: boolean }[]
         setStories(data)
     }
     const saveStory = async () => {
@@ -98,12 +98,37 @@ export default function StoryOverview({ storyData }: { storyData: { id: string, 
                 stories.map((s) => (<div key={s.id} className="rounded-lg bg-gradient-to-br from-[#FFDF35] to-[#00FFFF] px-8 py-8 flex flex-col space-y-2 text-white">
                     <h3 className="font-black uppercase text-4xl">{s.name}</h3>
                     <p className="text-sm uppercase">{s.description}</p>
-                    <button className="bg-white rounded-xl px-4 py-2 w-fit hover:scale-105 transition duraiton-300 ease-in-out" onClick={() => setPreviewModal(s.file)}>
-                        <div className="flex items-center space-x-4">
-                            <h3 className="text-black font-extrabold uppercase">Play Now</h3>
-                            <IconArrowRight className="text-black h-4 w-4" />
+                    <div className="flex">
+                        <button className="bg-white rounded-xl px-4 py-2 w-fit hover:scale-105 transition duraiton-300 ease-in-out" onClick={() => setPreviewModal(s.file)}>
+                            <div className="flex items-center space-x-4">
+                                <h3 className="text-black font-extrabold uppercase">Play Now</h3>
+                                <IconArrowRight className="text-black h-4 w-4" />
+                            </div>
+                        </button>
+                        <div className="flex-grow flex items-center justify-end">
+                            <div className="w-fit h-fit" onClick={async () => {
+                                const res = await fetch('/api/story/mark-favorite', {
+                                    method: 'PUT',
+                                    body: JSON.stringify({
+                                        id: s.id,
+                                        favorite: !s.favorite
+                                    })
+                                })
+                                if (res.ok) {
+                                    setStories((stories) => stories.map((story) => {
+                                        if (story.id == s.id) {
+                                            return { ...s, favorite: !s.favorite }
+                                        }
+                                        return story
+                                    }))
+                                }
+                            }}>
+                                {
+                                    !s.favorite ? <IconStar /> : <IconStarFilled />
+                                }
+                            </div>
                         </div>
-                    </button>
+                    </div>
                 </div>))
             }
         </div>

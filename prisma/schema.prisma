@@ -12,8 +12,9 @@ datasource db {
 }
 
 model story {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String
   file        Bytes
+  favorite    Boolean @default(false)
 }
