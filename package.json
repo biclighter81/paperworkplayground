@@ -40,7 +40,7 @@
         "prerelease": true
       },
       {
-        "name": "+[0-9]",
+        "name": "+([0-9])",
         "prerelease": true
       }
     ]
