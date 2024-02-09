@@ -38,6 +38,10 @@
       {
         "name": "alpha",
         "prerelease": true
+      },
+      {
+        "name": "+[0-9]",
+        "prerelease": true
       }
     ]
   },
