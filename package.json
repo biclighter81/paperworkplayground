@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "semantic-release"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
@@ -17,29 +18,13 @@
     "react-modal": "^3.16.1",
     "react-pdf": "^7.6.0"
   },
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/npm"
-  ],
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/npm",
       "@semantic-release/git",
-      "@semantic-release/github",
-      [
-        "@codedependant/semantic-release-docker",
-        {
-          "dockerImage": "paperworkplayground",
-          "dockerRegistry": "ghcr.io",
-          "dockerProject": "biclighter81",
-          "dockerArgs": {
-            "GITHUB_TOKEN": null
-          }
-        }
-      ]
+      "@semantic-release/github"
     ],
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
@@ -49,7 +34,7 @@
       "main",
       {
         "name": "beta",
-        "prerelease": true
+        "prerelease": false
       },
       {
         "name": "alpha",
@@ -70,6 +55,7 @@
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "prisma": "^5.7.1",
+    "semantic-release": "^23.0.2",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
