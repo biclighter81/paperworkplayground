@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "semantic-release"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
@@ -17,29 +18,12 @@
     "react-modal": "^3.16.1",
     "react-pdf": "^7.6.0"
   },
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/npm"
-  ],
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/npm",
-      "@semantic-release/git",
-      "@semantic-release/github",
-      [
-        "@codedependant/semantic-release-docker",
-        {
-          "dockerImage": "paperworkplayground",
-          "dockerRegistry": "ghcr.io",
-          "dockerProject": "biclighter81",
-          "dockerArgs": {
-            "GITHUB_TOKEN": null
-          }
-        }
-      ]
+      "@semantic-release/git"
     ],
     "branches": [
       "+([0-9])?(.{+([0-9]),x}).x",
